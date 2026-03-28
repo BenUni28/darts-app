@@ -1,0 +1,25 @@
+{
+  "name": "darts-app",
+  "version": "0.1.0",
+  "description": "Personal darts scoring web app",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
+    "server:dev": "nodemon server/index.js",
+    "client:dev": "vite client",
+    "build": "vite build client",
+    "preview": "vite preview client",
+    "db:shell": "sqlite3 data/darts.db"
+  },
+  "dependencies": {
+    "better-sqlite3": "^9.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.18.3",
+    "helmet": "^7.1.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.1.0",
+    "vite": "^5.1.6"
+  }
+}
