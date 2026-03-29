@@ -8,6 +8,7 @@
     "server:dev": "nodemon server/index.js",
     "client:dev": "vite",
     "build": "vite build",
+    "start": "NODE_ENV=production node server/index.js",
     "preview": "vite preview",
     "db:shell": "sqlite3 data/darts.db"
   },
