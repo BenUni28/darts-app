@@ -47,11 +47,12 @@ export async function playersPage(appEl) {
                    <th>AVG</th>
                    <th>180s</th>
                    <th>BEST OUT</th>
+                   <th></th>
                  </tr>
                </thead>
                <tbody>
                  ${players.map(p => `
-                   <tr style="cursor:pointer" onclick="window.location.hash='/players/${p.id}'">
+                   <tr>
                      <td>
                        <span style="font-size:18px">${p.avatar ?? '🎯'}</span>
                        <strong style="margin-left:8px">${p.name}</strong>
@@ -61,6 +62,13 @@ export async function playersPage(appEl) {
                      <td class="text-green">${p.avg_per_turn ?? '—'}</td>
                      <td>${p.count_180 > 0 ? `<span class="text-gold">★ ${p.count_180}</span>` : '—'}</td>
                      <td>${p.best_checkout > 0 ? p.best_checkout : '—'}</td>
+                     <td>
+                       <button class="btn btn-danger archive-btn"
+                               data-id="${p.id}" data-name="${p.name}"
+                               style="font-size:8px;padding:4px 8px">
+                         ✕
+                       </button>
+                     </td>
                    </tr>
                  `).join('')}
                </tbody>
@@ -97,6 +105,16 @@ export async function playersPage(appEl) {
     // Submit on Enter key in input
     document.getElementById('player-name-input')?.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') document.getElementById('save-player-btn').click()
+    })
+
+    // Archive (soft-delete) buttons
+    document.querySelectorAll('.archive-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const name = btn.dataset.name
+        if (!confirm(`"${name}" archivieren? Der Spieler wird aus der Liste entfernt, die Spielhistorie bleibt erhalten.`)) return
+        await api.players.update(Number(btn.dataset.id), { is_active: 0 })
+        render()
+      })
     })
   }
 

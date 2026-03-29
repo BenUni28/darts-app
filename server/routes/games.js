@@ -2,7 +2,7 @@ import { Router } from 'express'
 import { validateCreateGame, validateSubmitTurn } from '../middleware/validate.js'
 import { httpError } from '../middleware/errors.js'
 import { createGame, getGameState, listGames, abandonGame, getGameById, getLegTurns } from '../db/queries/games.js'
-import { submitTurn, undoLastTurn } from '../db/queries/turns.js'
+import { submitTurn, submitCricketTurn, undoLastTurn } from '../db/queries/turns.js'
 import { rebuildPlayerStats } from '../db/queries/stats.js'
 
 const router = Router()
@@ -44,22 +44,25 @@ router.get('/:id/turns', (req, res, next) => {
 // POST /api/games/:id/turns — submit a turn
 router.post('/:id/turns', validateSubmitTurn, (req, res, next) => {
   try {
-    const result = submitTurn({
-      gameId: Number(req.params.id),
-      ...req.body
-    })
+    const { player_id, score, darts } = req.body
+    const gId = Number(req.params.id)
+    const game = getGameById(gId)
+    if (!game) return next(httpError(404, 'Game not found'))
+
+    const result = game.game_type === 'Cricket'
+      ? submitCricketTurn({ gameId: gId, playerId: player_id, darts })
+      : submitTurn({ gameId: gId, playerId: player_id, score, darts })
 
     // If the game just completed, rebuild stats for all players in the game
     if (result.gameComplete) {
-      const game = getGameById(Number(req.params.id))
-      const gameState = getGameState(Number(req.params.id))
+      const gameState = getGameState(gId)
       for (const player of gameState.players) {
         rebuildPlayerStats(player.id)
       }
     }
 
     // Return updated game state so the client can re-render
-    const updatedState = getGameState(Number(req.params.id))
+    const updatedState = getGameState(gId)
     res.json({ ...result, game: updatedState })
   } catch (err) {
     next(err)

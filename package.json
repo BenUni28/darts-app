@@ -6,9 +6,9 @@
   "scripts": {
     "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
     "server:dev": "nodemon server/index.js",
-    "client:dev": "vite client",
-    "build": "vite build client",
-    "preview": "vite preview client",
+    "client:dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "db:shell": "sqlite3 data/darts.db"
   },
   "dependencies": {

@@ -495,6 +495,463 @@ h3 { font-size: 10px; color: var(--white); margin-bottom: var(--space-3); }
   66%  { content: '...'; }
 }
 
+/* --- Input Mode Toggle --- */
+.input-mode-toggle {
+  display: flex;
+  max-width: 360px;
+  margin: 0 auto;
+  border: 2px solid var(--border);
+}
+
+.mode-btn {
+  flex: 1;
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  padding: var(--space-3) var(--space-2);
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.mode-btn.active {
+  background: var(--border);
+  color: var(--cyan);
+  text-shadow: var(--glow-cyan);
+}
+
+.mode-btn:hover:not(.active) {
+  color: var(--white);
+}
+
+/* --- Dart-by-dart: Dart slots --- */
+.dart-slots {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  justify-content: center;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.dart-slot {
+  flex: 1;
+  text-align: center;
+  padding: var(--space-3) var(--space-2);
+  border: 2px solid var(--border);
+  background: var(--surface-2);
+  min-height: 68px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.15s;
+}
+
+.dart-slot.active {
+  border-color: var(--cyan);
+  box-shadow: var(--glow-cyan);
+}
+
+.dart-slot.filled {
+  border-color: var(--border-bright);
+}
+
+.dart-slot-label {
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  color: var(--magenta);
+  letter-spacing: 1px;
+}
+
+.dart-slot-score {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+  margin-top: var(--space-1);
+  min-height: 24px;
+}
+
+.dart-slot-total {
+  font-family: var(--font-pixel);
+  font-size: 11px;
+  min-width: 64px;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* --- Dart-by-dart: Multiplier row --- */
+.multiplier-row {
+  display: flex;
+  gap: var(--space-2);
+  justify-content: center;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.mult-btn {
+  flex: 1;
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  padding: var(--space-3) var(--space-2);
+  background: var(--surface-2);
+  border: 2px solid var(--border);
+  color: var(--muted);
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.1s;
+  line-height: 1.6;
+}
+
+.mult-btn.active {
+  border-color: var(--magenta);
+  color: var(--magenta);
+  text-shadow: var(--glow-magenta);
+}
+
+.mult-btn:hover:not(.active) {
+  border-color: var(--muted);
+  color: var(--white);
+}
+
+/* --- Dart-by-dart: Segment grid --- */
+.segment-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-1);
+  max-width: 380px;
+  margin: 0 auto;
+}
+
+.seg-btn {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 15px;
+  padding: var(--space-3) var(--space-2);
+  background: var(--surface-2);
+  border: 2px solid var(--border);
+  color: var(--white);
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.08s;
+  user-select: none;
+}
+
+.seg-btn:hover:not(:disabled) {
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+
+.seg-btn:active:not(:disabled) {
+  background: var(--cyan);
+  color: var(--bg);
+}
+
+.seg-btn:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
+/* BULL spans 2 columns, MISS spans 3 — together they fill the last row of 5 */
+.seg-bull {
+  grid-column: span 2;
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+.seg-bull:hover:not(:disabled) {
+  background: var(--gold);
+  color: var(--bg);
+  box-shadow: var(--glow-gold);
+}
+
+.seg-miss {
+  grid-column: span 3;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+/* --- Cricket scoreboard --- */
+.cricket-board {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.cricket-header {
+  display: flex;
+  background: var(--surface-2);
+  border-bottom: 2px solid var(--border-bright);
+}
+
+.cricket-seg-label {
+  width: 60px;
+  min-width: 60px;
+  padding: 10px 8px;
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  color: var(--muted);
+  text-align: center;
+  border-right: 1px solid var(--border);
+}
+
+.cricket-player-col {
+  flex: 1;
+  padding: 8px 4px;
+  text-align: center;
+  border-right: 1px solid var(--border);
+}
+.cricket-player-col:last-child { border-right: none; }
+
+.cricket-player-col.active {
+  background: rgba(0, 245, 255, 0.06);
+}
+
+.cricket-player-name {
+  font-family: var(--font-body);
+  font-size: 9px;
+  color: var(--white);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cricket-points {
+  font-family: var(--font-pixel);
+  font-size: 14px;
+  color: var(--cyan);
+  text-shadow: var(--glow-cyan);
+  margin-top: 4px;
+}
+
+.cricket-row {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+}
+.cricket-row:last-child { border-bottom: none; }
+
+.cricket-row-closed {
+  opacity: 0.4;
+}
+
+.cricket-cell {
+  flex: 1;
+  padding: 8px 4px;
+  text-align: center;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.cricket-cell:last-child { border-right: none; }
+
+.cricket-cell.cricket-closed .cricket-marks {
+  color: var(--gold);
+  text-shadow: var(--glow-gold);
+}
+
+.cricket-marks {
+  font-family: var(--font-pixel);
+  font-size: 13px;
+  color: var(--cyan);
+  min-width: 16px;
+  display: inline-block;
+}
+
+.cricket-pts {
+  font-size: 9px;
+  color: var(--green);
+  font-family: var(--font-body);
+}
+
+.cricket-totals-row {
+  background: var(--surface-2);
+  border-top: 2px solid var(--border-bright);
+}
+
+/* --- Rules modal --- */
+#rules-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 20px;
+}
+
+.rules-paper {
+  background: var(--surface);
+  border: 2px solid var(--border-bright);
+  box-shadow: var(--glow-cyan), inset 0 0 40px rgba(0,0,0,0.5);
+  max-width: 520px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 32px;
+}
+
+.rules-title {
+  font-family: var(--font-pixel);
+  font-size: 14px;
+  color: var(--gold);
+  text-shadow: var(--glow-gold);
+  text-align: center;
+  margin-bottom: 24px;
+  letter-spacing: 2px;
+}
+
+.rules-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.rules-section-title {
+  font-family: var(--font-pixel);
+  font-size: 9px;
+  color: var(--cyan);
+  text-shadow: var(--glow-cyan);
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+}
+
+.rules-section-text {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--white);
+  line-height: 1.8;
+}
+
+/* --- Keyboard shortcode preview (dart × dart mode) --- */
+.kb-preview {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid var(--border);
+  padding: 8px 14px;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 1px;
+  min-height: 30px;
+  line-height: 30px;
+}
+
+.kb-buffer {
+  font-family: var(--font-pixel);
+  font-size: 12px;
+  color: var(--cyan);
+  text-shadow: var(--glow-cyan);
+}
+
+.kb-dart {
+  font-family: var(--font-pixel);
+  font-size: 12px;
+  color: var(--gold);
+  text-shadow: var(--glow-gold);
+}
+
+.kb-hint {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+/* --- Win Animation Overlay --- */
+#win-anim {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.88);
+  z-index: 5000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  animation: win-overlay-in 0.25s ease-out both;
+}
+
+#win-anim.win-anim-out {
+  animation: fade-out 0.4s ease-in forwards;
+}
+
+.win-anim-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: var(--space-6);
+}
+
+.win-anim-stars {
+  font-family: var(--font-pixel);
+  font-size: 12px;
+  color: var(--gold);
+  text-shadow: var(--glow-gold);
+  letter-spacing: 10px;
+  animation: star-flicker 0.3s ease-in-out infinite alternate;
+}
+
+.win-anim-title {
+  font-family: var(--font-pixel);
+  font-size: clamp(22px, 5vw, 40px);
+  color: var(--gold);
+  text-shadow: 0 0 10px #ffd700, 0 0 30px #ffd700, 0 0 60px #ffd700aa;
+  animation: px-drop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.4) both;
+  margin: var(--space-4) 0 var(--space-3);
+  line-height: 1.3;
+}
+
+.win-anim-name {
+  font-family: var(--font-pixel);
+  font-size: clamp(14px, 3.5vw, 26px);
+  color: var(--cyan);
+  text-shadow: var(--glow-cyan);
+  animation: px-drop 0.35s 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.4) both;
+  margin-bottom: var(--space-4);
+}
+
+.win-anim-sub {
+  font-family: var(--font-pixel);
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 3px;
+  animation: fade-in 0.4s 0.3s both;
+}
+
+/* Pixel particle */
+.win-px {
+  position: absolute;
+  image-rendering: pixelated;
+  animation: px-burst 0.9s ease-out forwards;
+}
+
+@keyframes win-overlay-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes px-drop {
+  0%   { transform: scale(0) rotate(-8deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0deg);  opacity: 1; }
+}
+
+@keyframes px-burst {
+  0%   { transform: translate(0, 0) rotate(0deg)   scale(1);   opacity: 1; }
+  70%  { opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)) rotate(270deg) scale(0.3); opacity: 0; }
+}
+
+@keyframes star-flicker {
+  from { opacity: 0.7; transform: scale(1);    }
+  to   { opacity: 1;   transform: scale(1.08); }
+}
+
+@keyframes fade-out {
+  to { opacity: 0; transform: scale(0.95); }
+}
+
 /* --- Responsive --- */
 @media (max-width: 600px) {
   .score-xl { font-size: 40px; }

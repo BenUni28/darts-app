@@ -120,7 +120,20 @@ export function getGameState(gameId) {
     }
   }
 
-  return { ...game, players, activeLeg, currentPlayerId }
+  // For Cricket: attach the current marks/points state per player per segment
+  let cricketState = null
+  if (game.game_type === 'Cricket' && activeLeg) {
+    const rows = db.prepare(
+      'SELECT player_id, segment, marks, points FROM cricket_state WHERE leg_id = ?'
+    ).all(activeLeg.id)
+    cricketState = {}
+    for (const row of rows) {
+      if (!cricketState[row.player_id]) cricketState[row.player_id] = {}
+      cricketState[row.player_id][row.segment] = { marks: row.marks, points: row.points }
+    }
+  }
+
+  return { ...game, players, activeLeg, currentPlayerId, cricketState }
 }
 
 /**

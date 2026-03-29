@@ -59,6 +59,7 @@ export function calcAverage(turns) {
  * @returns {number}
  */
 export function startingScore(gameType) {
+  if (gameType === 'Cricket') return 0   // Cricket uses marks, not a countdown score
   return parseInt(gameType, 10)
 }
 
