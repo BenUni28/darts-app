@@ -4,7 +4,9 @@ import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const DB_PATH = join(__dirname, '../../data/darts.db')
+// In production (Railway) DATABASE_PATH points to the persistent volume.
+// In dev it falls back to the local data/ folder.
+const DB_PATH = process.env.DATABASE_PATH ?? join(__dirname, '../../data/darts.db')
 const MIGRATIONS_DIR = join(__dirname, 'migrations')
 
 // Open (or create) the SQLite database file.
