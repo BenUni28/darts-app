@@ -69,6 +69,19 @@ export async function homePage(appEl) {
       <div class="mt-5 text-center">
         <button class="btn btn-primary" id="start-btn" disabled>START GAME</button>
       </div>
+
+      <!-- Spotify -->
+      <div class="card mt-6 spotify-card">
+        <h2 class="mb-4">♫ DARTS SOUNDTRACK</h2>
+        <iframe
+          style="border-radius:0"
+          src="https://open.spotify.com/embed/playlist/37i9dQZF1EIeSXIfGg7RBn?utm_source=generator"
+          width="100%" height="352" frameBorder="0"
+          allowfullscreen=""
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy">
+        </iframe>
+      </div>
     </div>
   `
 

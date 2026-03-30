@@ -854,6 +854,20 @@ h3 { font-size: 10px; color: var(--white); margin-bottom: var(--space-3); }
   text-shadow: var(--glow-gold);
 }
 
+/* --- Spotify card --- */
+.spotify-card {
+  border-color: var(--border-bright);
+  box-shadow: var(--glow-cyan);
+}
+
+.spotify-card iframe {
+  display: block;
+  border: 1px solid var(--border);
+  filter: hue-rotate(200deg) saturate(0.8);  /* tints Spotify green → retro cyan */
+}
+
+.mt-6 { margin-top: 48px; }
+
 .kb-hint {
   color: var(--muted);
   font-size: 10px;
