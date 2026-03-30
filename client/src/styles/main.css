@@ -854,6 +854,26 @@ h3 { font-size: 10px; color: var(--white); margin-bottom: var(--space-3); }
   text-shadow: var(--glow-gold);
 }
 
+/* --- Home page grid --- */
+.home-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+}
+
+.home-left,
+.home-right {
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Larger START GAME button --- */
+.btn-lg {
+  padding: 14px 40px;
+  font-size: 13px;
+  letter-spacing: 3px;
+}
+
 /* --- Spotify card --- */
 .spotify-card {
   border-color: var(--border-bright);
@@ -863,7 +883,7 @@ h3 { font-size: 10px; color: var(--white); margin-bottom: var(--space-3); }
 .spotify-card iframe {
   display: block;
   border: 1px solid var(--border);
-  filter: hue-rotate(200deg) saturate(0.8);  /* tints Spotify green → retro cyan */
+  filter: hue-rotate(200deg) saturate(0.8);
 }
 
 .flex-1 { flex: 1; }

@@ -8,11 +8,11 @@ export async function homePage(appEl) {
     <div class="anim-fade-in">
       <h1>★ NEW GAME ★</h1>
 
-      <div class="grid-2 gap-5">
+      <div class="home-grid gap-5">
         <!-- LEFT: Game settings -->
-        <div>
-          <div class="card mb-5">
-            <h2>GAME TYPE</h2>
+        <div class="home-left">
+          <div class="card mb-4">
+            <h2 class="mb-4">GAME TYPE</h2>
             <div class="flex gap-2" id="game-type-btns">
               <button class="btn btn-primary type-btn active" data-type="501">501</button>
               <button class="btn btn-ghost  type-btn" data-type="301">301</button>
@@ -20,8 +20,8 @@ export async function homePage(appEl) {
             </div>
           </div>
 
-          <div class="card mb-5">
-            <h2>LEGS</h2>
+          <div class="card mb-4">
+            <h2 class="mb-4">LEGS</h2>
             <div class="flex gap-2" id="legs-btns">
               <button class="btn btn-primary legs-btn active" data-legs="1">1</button>
               <button class="btn btn-ghost  legs-btn" data-legs="3">BEST OF 3</button>
@@ -29,38 +29,26 @@ export async function homePage(appEl) {
             </div>
           </div>
 
-          <div class="flex gap-3 mb-5">
-            <div class="card flex-1" id="double-out-card">
-              <h2>DOUBLE OUT</h2>
-              <div class="flex gap-2 mt-3">
-                <button class="btn btn-primary double-btn active" data-double="1">ON</button>
-                <button class="btn btn-ghost  double-btn" data-double="0">OFF</button>
-              </div>
-            </div>
-
-            <div class="card flex-1 spotify-card">
-              <h2 class="mb-3">♫ MUSIK</h2>
-              <iframe
-                src="https://open.spotify.com/embed/playlist/37i9dQZF1EIeSXIfGg7RBn?utm_source=generator"
-                width="100%" height="80" frameBorder="0"
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy">
-              </iframe>
+          <div class="card" id="double-out-card">
+            <h2 class="mb-4">DOUBLE OUT</h2>
+            <div class="flex gap-2">
+              <button class="btn btn-primary double-btn active" data-double="1">ON</button>
+              <button class="btn btn-ghost  double-btn" data-double="0">OFF</button>
             </div>
           </div>
         </div>
 
-        <!-- RIGHT: Player selection -->
-        <div>
-          <div class="card">
-            <h2>PLAYERS</h2>
+        <!-- RIGHT: Player selection + Spotify -->
+        <div class="home-right">
+          <div class="card mb-4">
+            <h2 class="mb-2">PLAYERS</h2>
             <p class="text-muted mb-4" style="font-size:11px">Select 2–8 players in throw order</p>
 
             <div id="player-list">
               ${players.length === 0
                 ? `<p class="text-muted" style="font-size:11px">No players yet. <a href="#/players" class="text-cyan">Add some first.</a></p>`
                 : players.map(p => `
-                  <div class="player-select-row flex-between mb-4" data-id="${p.id}">
+                  <div class="player-select-row flex-between mb-3" data-id="${p.id}">
                     <span class="player-select-name">${p.avatar ?? '🎯'} ${p.name}</span>
                     <button class="btn btn-ghost select-btn" data-id="${p.id}">ADD</button>
                   </div>
@@ -68,18 +56,29 @@ export async function homePage(appEl) {
               }
             </div>
 
-            <div class="mt-5">
-              <h3>SELECTED (throw order)</h3>
-              <div id="selected-players" class="mt-4">
+            <div class="mt-4">
+              <h3 class="mb-3">SELECTED (throw order)</h3>
+              <div id="selected-players">
                 <p class="text-muted" style="font-size:11px">None selected</p>
               </div>
             </div>
+          </div>
+
+          <!-- Spotify below Players card -->
+          <div class="card spotify-card">
+            <h2 class="mb-3">♫ MUSIK</h2>
+            <iframe
+              src="https://open.spotify.com/embed/playlist/37i9dQZF1EIeSXIfGg7RBn?utm_source=generator"
+              width="100%" height="80" frameBorder="0"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy">
+            </iframe>
           </div>
         </div>
       </div>
 
       <div class="mt-5 text-center">
-        <button class="btn btn-primary" id="start-btn" disabled>START GAME</button>
+        <button class="btn btn-primary btn-lg" id="start-btn" disabled>★ START GAME ★</button>
       </div>
 
     </div>
