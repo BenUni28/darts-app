@@ -67,12 +67,14 @@ export async function homePage(appEl) {
           <!-- Spotify below Players card -->
           <div class="card spotify-card">
             <h2 class="mb-3">♫ MUSIK</h2>
-            <iframe
-              src="https://open.spotify.com/embed/playlist/37i9dQZF1EIeSXIfGg7RBn?utm_source=generator"
-              width="100%" height="80" frameBorder="0"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="lazy">
-            </iframe>
+            <div class="spotify-iframe-wrap">
+              <iframe
+                src="https://open.spotify.com/embed/playlist/37i9dQZF1EIeSXIfGg7RBn?utm_source=generator"
+                width="100%" height="85" frameBorder="0"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy">
+              </iframe>
+            </div>
           </div>
         </div>
       </div>
