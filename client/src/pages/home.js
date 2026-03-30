@@ -29,11 +29,23 @@ export async function homePage(appEl) {
             </div>
           </div>
 
-          <div class="card mb-5" id="double-out-card">
-            <h2>DOUBLE OUT</h2>
-            <div class="flex gap-2">
-              <button class="btn btn-primary double-btn active" data-double="1">ON</button>
-              <button class="btn btn-ghost  double-btn" data-double="0">OFF</button>
+          <div class="flex gap-3 mb-5">
+            <div class="card flex-1" id="double-out-card">
+              <h2>DOUBLE OUT</h2>
+              <div class="flex gap-2 mt-3">
+                <button class="btn btn-primary double-btn active" data-double="1">ON</button>
+                <button class="btn btn-ghost  double-btn" data-double="0">OFF</button>
+              </div>
+            </div>
+
+            <div class="card flex-1 spotify-card">
+              <h2 class="mb-3">♫ MUSIK</h2>
+              <iframe
+                src="https://open.spotify.com/embed/playlist/37i9dQZF1EIeSXIfGg7RBn?utm_source=generator"
+                width="100%" height="80" frameBorder="0"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy">
+              </iframe>
             </div>
           </div>
         </div>
@@ -70,18 +82,6 @@ export async function homePage(appEl) {
         <button class="btn btn-primary" id="start-btn" disabled>START GAME</button>
       </div>
 
-      <!-- Spotify -->
-      <div class="card mt-6 spotify-card">
-        <h2 class="mb-4">♫ DARTS SOUNDTRACK</h2>
-        <iframe
-          style="border-radius:0"
-          src="https://open.spotify.com/embed/playlist/37i9dQZF1EIeSXIfGg7RBn?utm_source=generator"
-          width="100%" height="352" frameBorder="0"
-          allowfullscreen=""
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          loading="lazy">
-        </iframe>
-      </div>
     </div>
   `
 

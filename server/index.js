@@ -19,7 +19,14 @@ const app = express()
 const PORT = process.env.PORT || 3001
 
 // --- Middleware ---
-app.use(helmet())
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+      'frame-src': ["'self'", 'https://open.spotify.com'],
+    }
+  }
+}))
 // In production the frontend is served by this same server, so no CORS needed.
 // In dev, allow the Vite dev server on localhost.
 app.use(cors({ origin: process.env.NODE_ENV === 'production' ? false : 'http://localhost:5173' }))
