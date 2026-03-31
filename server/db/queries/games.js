@@ -98,7 +98,11 @@ export function getGameState(gameId) {
     LIMIT 1
   `).get(gameId)
 
-  // Whose turn is it? Find the player with fewest turns in this leg.
+  // Whose turn is it?
+  // In a best-of series the starting player rotates each leg:
+  // leg 1 → turn_order 1 starts, leg 2 → turn_order 2 starts, etc.
+  // We rotate the players array by (leg_number - 1) % numPlayers so the
+  // player with the fewest turns is found in the correct priority order.
   let currentPlayerId = null
   if (activeLeg) {
     const turnCounts = db.prepare(`
@@ -109,9 +113,12 @@ export function getGameState(gameId) {
     `).all(activeLeg.id)
 
     const countMap = Object.fromEntries(turnCounts.map(r => [r.player_id, r.turn_count]))
-    // Find the player with the lowest turn count (in turn_order if tied)
+
+    const offset = (activeLeg.leg_number - 1) % players.length
+    const rotated = [...players.slice(offset), ...players.slice(0, offset)]
+
     let minTurns = Infinity
-    for (const p of players) {
+    for (const p of rotated) {
       const count = countMap[p.id] ?? 0
       if (count < minTurns) {
         minTurns = count

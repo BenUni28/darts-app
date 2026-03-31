@@ -937,6 +937,47 @@ h3 { font-size: 10px; color: var(--white); margin-bottom: var(--space-3); }
 .flex-1 { flex: 1; }
 .mt-6   { margin-top: 48px; }
 
+/* --- Shuffle toggle (home page) --- */
+.shuffle-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  color: var(--muted);
+  user-select: none;
+}
+
+.shuffle-label input[type="checkbox"] {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--border-bright);
+  background: var(--surface-2);
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.shuffle-label input[type="checkbox"]:checked {
+  background: var(--magenta);
+  border-color: var(--magenta);
+}
+
+.shuffle-label input[type="checkbox"]:checked::after {
+  content: '✓';
+  position: absolute;
+  top: -2px;
+  left: 1px;
+  font-size: 11px;
+  color: var(--bg);
+}
+
+.shuffle-label:hover {
+  color: var(--white);
+}
+
 .kb-hint {
   color: var(--muted);
   font-size: 10px;

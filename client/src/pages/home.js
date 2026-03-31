@@ -57,7 +57,13 @@ export async function homePage(appEl) {
             </div>
 
             <div class="mt-4">
-              <h3 class="mb-3">SELECTED (throw order)</h3>
+              <div class="flex-between mb-3">
+                <h3>SELECTED (throw order)</h3>
+                <label class="shuffle-label">
+                  <input type="checkbox" id="shuffle-check">
+                  <span>🔀 RANDOM</span>
+                </label>
+              </div>
               <div id="selected-players">
                 <p class="text-muted" style="font-size:11px">None selected</p>
               </div>
@@ -156,9 +162,17 @@ export async function homePage(appEl) {
   })
 
   document.getElementById('start-btn').addEventListener('click', async () => {
+    const ids = [...selectedIds]
+    if (document.getElementById('shuffle-check').checked) {
+      // Fisher-Yates shuffle
+      for (let i = ids.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [ids[i], ids[j]] = [ids[j], ids[i]]
+      }
+    }
     const game = await api.games.create({
       game_type: gameType,
-      player_ids: selectedIds,
+      player_ids: ids,
       legs_to_win: legsToWin,
       double_out: doubleOut
     })
