@@ -64,18 +64,8 @@ export async function homePage(appEl) {
             </div>
           </div>
 
-          <!-- Spotify below Players card -->
-          <div class="card spotify-card">
-            <h2 class="mb-3">♫ MUSIK</h2>
-            <div class="spotify-iframe-wrap">
-              <iframe
-                src="https://open.spotify.com/embed/playlist/37i9dQZF1EIeSXIfGg7RBn?utm_source=generator"
-                width="100%" height="85" frameBorder="0"
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy">
-              </iframe>
-            </div>
-          </div>
+          <!-- Placeholder — the real Spotify iframe floats here via JS -->
+          <div id="spotify-placeholder" class="card spotify-card" style="height:114px"></div>
         </div>
       </div>
 
