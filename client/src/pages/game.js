@@ -310,7 +310,7 @@ export async function gamePage(appEl, params) {
       </div>
 
       <!-- Keyboard shortcode preview -->
-      <div class="kb-preview mb-3" id="kb-preview">${kbPreviewHTML()}</div>
+      <div class="kb-preview" id="kb-preview">${kbPreviewHTML()}</div>
 
       <!-- Multiplier -->
       <div class="multiplier-row mb-3">
