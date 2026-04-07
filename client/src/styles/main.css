@@ -1076,8 +1076,36 @@ h3 { font-size: 10px; color: var(--white); margin-bottom: var(--space-3); }
   to { opacity: 0; transform: scale(0.95); }
 }
 
+/* --- Training --- */
+.training-stats-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+}
+
+.training-stat {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: var(--space-3) var(--space-2);
+  text-align: center;
+}
+
+.training-stat-val {
+  font-family: var(--font-display);
+  font-size: 22px;
+  line-height: 1;
+  margin-bottom: var(--space-2);
+}
+
+.training-stat-lbl {
+  font-size: 8px;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+
 /* --- Responsive --- */
 @media (max-width: 600px) {
+  .training-stats-bar { grid-template-columns: repeat(2, 1fr); }
   .score-xl { font-size: 40px; }
   .grid-2   { grid-template-columns: 1fr; }
   .grid-3   { grid-template-columns: 1fr 1fr; }

@@ -17,10 +17,11 @@ export async function homePage(appEl) {
               <button class="btn btn-primary type-btn active" data-type="501">501</button>
               <button class="btn btn-ghost  type-btn" data-type="301">301</button>
               <button class="btn btn-ghost  type-btn" data-type="Cricket">CRICKET</button>
+              <button class="btn btn-ghost  type-btn" data-type="Training">TRAINING</button>
             </div>
           </div>
 
-          <div class="card mb-4">
+          <div class="card mb-4" id="legs-card">
             <h2 class="mb-4">LEGS</h2>
             <div class="flex gap-2" id="legs-btns">
               <button class="btn btn-primary legs-btn active" data-legs="1">1</button>
@@ -42,7 +43,7 @@ export async function homePage(appEl) {
         <div class="home-right">
           <div class="card mb-4">
             <h2 class="mb-2">PLAYERS</h2>
-            <p class="text-muted mb-4" style="font-size:11px">Select 2–8 players in throw order</p>
+            <p class="text-muted mb-4" style="font-size:11px" id="players-hint">Select 2–8 players in throw order</p>
 
             <div id="player-list">
               ${players.length === 0
@@ -113,7 +114,8 @@ export async function homePage(appEl) {
         `
       }).join('')
     }
-    document.getElementById('start-btn').disabled = selectedIds.length < 2
+    const minPlayers = gameType === 'Training' ? 1 : 2
+    document.getElementById('start-btn').disabled = selectedIds.length < minPlayers
   }
 
   window.__removePlayer = (id) => {
@@ -130,9 +132,19 @@ export async function homePage(appEl) {
     btn.addEventListener('click', () => {
       gameType = btn.dataset.type
       setActive('.type-btn', btn)
-      // Hide double-out for Cricket
+      const isTraining = gameType === 'Training'
+      // Hide legs + double-out for Training; hide double-out for Cricket
+      document.getElementById('legs-card').style.display =
+        isTraining ? 'none' : ''
       document.getElementById('double-out-card').style.display =
-        gameType === 'Cricket' ? 'none' : ''
+        (isTraining || gameType === 'Cricket') ? 'none' : ''
+      // Update player hint
+      document.getElementById('players-hint').textContent =
+        isTraining ? 'Select 1 player to practice' : 'Select 2–8 players in throw order'
+      // Hide shuffle for Training (single player, order irrelevant)
+      const shuffleLabel = document.querySelector('.shuffle-label')
+      if (shuffleLabel) shuffleLabel.style.display = isTraining ? 'none' : ''
+      renderSelected()
     })
   })
 
@@ -162,6 +174,10 @@ export async function homePage(appEl) {
   })
 
   document.getElementById('start-btn').addEventListener('click', async () => {
+    if (gameType === 'Training') {
+      navigate(`/training/${selectedIds[0]}`)
+      return
+    }
     const ids = [...selectedIds]
     if (document.getElementById('shuffle-check').checked) {
       // Fisher-Yates shuffle
