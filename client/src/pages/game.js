@@ -359,7 +359,7 @@ export async function gamePage(appEl, params) {
 
         ${isCricket
           ? cricketBoardHTML()
-          : `<div class="${game.players.length === 2 ? 'grid-2' : 'grid-3'} gap-4 mb-5">
+          : `<div class="scoreboard-row mb-5" data-players="${game.players.length}">
                ${scoreboardHTML()}
              </div>`
         }
